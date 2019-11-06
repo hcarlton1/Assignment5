@@ -1,0 +1,59 @@
+<% include ./partials/header.ejs %>
+<% include ./partials/side-navigation.ejs %>
+
+<!-- start the main section -->
+
+<section class="profile">
+  <h1>Your profile</h1>
+  <% if(typeof data == "undefined"){ %>
+  <p>Your profile is empty. Please login to view saved items!</p>
+  <% }else{ %>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Category </th>
+      <th>Rating</th>
+      <th>Downloaded It?</th>
+      <th></th>
+    </tr>
+
+
+    <% for(let i =0; i< data.length;i++) { %>
+    <tr class="profile_row">
+      <td>
+        <%= data[i].item.name %>
+      </td>
+      <td>
+        <%= data[i].item.category %>
+      </td>
+
+      <td>
+        <%= data[i].rating %>
+      </td>
+      <td>
+        <%= data[i].madeIt %>
+      </td>
+
+      <td>
+        <form action="profile" method="post">
+          <% for(let j =0; j< data.length;j++) {%>
+          <input type="hidden" name="itemList" value="<%= data[j].item.code %>" />
+          <% } %>
+          <input type="hidden" name="itemCode" value="<%= data[i].item.code %>" />
+
+          <button type="submit" class="submitButton" name="action" value="update">Update</button>
+          <button type="submit" class="submitButton" name="action" value="delete">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <% } %>
+  </table>
+  <% } %>
+</section>
+<section>
+  <form action="/categories" method="get" id="float_left">
+    <input type="submit" value="Continue browsing">
+  </form>
+</section>
+<!-- end middle column -->
+<% include ./partials/footer.ejs %>

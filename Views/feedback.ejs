@@ -1,0 +1,53 @@
+<% include ./partials/header.ejs %>
+<% include ./partials/side-navigation.ejs %>
+
+<section>
+  <% console.log("in feedback "+JSON.stringify(data)); %>
+  <img src="/assets/images/<%= data.item.code %>.jpeg" width="175" alt="Item Image">
+
+  <h2>
+    <%= data.item.name %>
+  </h2>
+  <p>
+    <%= data.item.description%>
+  </p>
+  <form action="profile" method="post">
+    <input type="hidden" name="itemCode" value="<%= data.item.code %>" />
+    <input type="hidden" name="itemList" value="<%= data.item.code %>" />
+    <br> <select name="rating">
+      <option value=""></option>
+      <option value="1" <% if (data.rating==1){ %>selected ='selected'
+        <% } %> >1</option>
+      <option value="2" <% if (data.rating==2 ){ %>selected ='selected'
+        <% } %> >2</option>
+      <option value="3" <% if (data.rating==3 ){ %>selected ='selected'
+        <% } %> >3</option>
+      <option value="4" <% if (data.rating==4 ){ %>selected ='selected'
+        <% } %> >4</option>
+      <option value="5" <% if (data.rating==5 ){ %>selected ='selected'
+        <% } %> >5</option>
+    </select>
+    <button type="submit" class="submitButton" name="action" value="rate">Confirm Rating</button><br>
+    <p>
+      Yes
+      <input type="radio" name="madeIt" value='Yes' <% if (data.madeIt=="1" ){ %>checked
+      <% } %> >
+      No
+      <input type="radio" name="madeIt" value='No' <% if (data.madeIt=="0" ){ %>checked
+      <% } %> >
+
+      <button type="submit" class="submitButton" name="action" value="madeIt">Update Made it</button>
+    </p>
+  </form>
+
+
+
+</section>
+
+<section>
+  <form action="/categories" method="get" id="float_left">
+    <input type="submit" value="Continue browsing">
+  </form>
+</section>
+
+<% include ./partials/footer.ejs %>

@@ -1,0 +1,34 @@
+<% include ./partials/header.ejs %>
+<% include ./partials/side-navigation.ejs %>
+
+<!-- start the main section -->
+
+<section>
+  <img src="/assets/images/<%= data.code %>.jpeg" width="175" alt="Product Image">
+    <h2>
+        <%= data.name %>
+    </h2>
+    <p>
+        <%=data.description %>
+    </p>
+    <form action="/profile" method="post">
+
+        <input type="hidden" name="itemCode" value="<%= data.code %>" />
+        <input type="hidden" name="itemList" value="<%= data.code %>" />
+        <% if(typeof data.inProfile != "undefined" && data.inProfile == false){ %>
+
+        <button type="submit" class="submitButton" name="action" value="save">Save it</button><%}%>
+        <button type="submit" class="submitButton" name="action" value="rate">Rate it</button>
+
+    </form>
+
+
+</section>
+
+<section>
+    <form action="/categories" method="get" id="float_left">
+        <input type="submit" value="Continue browsing">
+    </form>
+</section>
+
+<% include ./partials/footer.ejs %>
